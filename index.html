@@ -101,6 +101,9 @@
     border-radius:12px; padding:18px; margin-top:14px; font-size:15px}
   .success.show{display:block}
   .hint{font-size:13px; color:var(--muted); margin-top:8px}
+  .report-link{display:block; margin-top:10px; font-size:13px; color:var(--muted)}
+  .fraud-note{background:#fff7e0; border:1px solid #f0d48a; color:#6d4c00;
+    font-size:14px; padding:12px 14px; border-radius:8px; margin:14px 0}
   /* faq */
   details{background:var(--card); border:1px solid var(--line); border-radius:10px;
     padding:13px 15px; margin-bottom:10px}
@@ -186,6 +189,12 @@
       <button type="button" id="f-clear">Clear all filters</button>
     </div>
 
+    <div class="fraud-note"><b>For parents — stay safe:</b><br>
+    • Contact tutors only through the buttons on this app, so we have a record and can help if anything goes wrong.<br>
+    • For home lessons, a parent or guardian must be at home during the lesson, and the lesson should happen in a common room — never leave your child alone with the tutor.<br>
+    • Never pay in advance. Start with one trial lesson and pay the tutor directly after it.<br>
+    • If anything feels wrong, tap 'Report this tutor' and tell us.</div>
+
     <p class="count" id="result-count"></p>
     <div class="cards" id="cards"></div>
   </section>
@@ -202,7 +211,7 @@
     <div class="steps">
       <div class="step"><div class="n">1</div><h4>List yourself</h4><p>Fill in the form below with your subjects, areas, rate and permit status.</p></div>
       <div class="step"><div class="n">2</div><h4>We check your permit</h4><p>Private tutors in the UAE need a permit. Permitted tutors get the verified badge.</p></div>
-      <div class="step"><div class="n">3</div><h4>Parents message you</h4><p>Your card appears in the list. Parents contact you on WhatsApp and book directly.</p></div>
+      <div class="step"><div class="n">3</div><h4>Parents message you</h4><p>Once approved, your card appears in the list. Parents contact you on WhatsApp and book directly.</p></div>
     </div>
     <div class="trust"><b>Trust note:</b> In the UAE, private tutors need a permit to teach. This app lists tutors who hold a permit — look for the “Permit verified” badge on a tutor's card. Always agree the price and lesson time with the tutor before the first lesson.</div>
   </section>
@@ -210,7 +219,12 @@
   <section id="join">
     <h2>List as a tutor</h2>
     <p class="sub">Are you a British-curriculum tutor in Dubai? Add yourself — it takes two minutes.</p>
+    <div class="fraud-note"><b>Stay safe:</b> Every registration is reviewed by our team before it appears on this page. Tutors must show permit proof for the “Permit verified” badge. Never pay in advance — start with one trial lesson and pay the tutor only after it.</div>
     <form class="tutor-form" id="tutor-form">
+      <div class="fraud-note"><b>Read before you apply:</b><br>
+      • Every application is reviewed by our team. Nothing goes live automatically.<br>
+      • After submitting, confirm your number by messaging us on WhatsApp. We will ask for your tutor permit and ID — send them to earn your 'Permit verified' badge. No permit proof, no listing.<br>
+      • If any detail is found fake — a false permit, false identity, or false qualifications — you will be blocked and you cannot apply again.</div>
       <label for="t-name">Your name *</label>
       <input id="t-name" required maxlength="40" placeholder="e.g. Ayesha K.">
 
@@ -285,11 +299,12 @@
       <textarea id="t-bio" required maxlength="240" placeholder="One or two lines about how you teach."></textarea>
 
       <button type="submit">Add my listing</button>
-      <p class="hint">Demo version: your listing is saved in this browser only (localStorage). No account is created and nothing is sent to a server.</p>
+      <p class="hint">Your details go to our team for review. Nothing is listed until we approve it — that is how we keep fake tutors off this page.</p>
     </form>
     <div class="success" id="form-success">
-      <b>Thank you — your listing is added.</b><br>
-      Your tutor card now appears in the list above (marked “New”). Parents can message you on WhatsApp. We will check your permit before launch and add the verified badge if it is in place.
+      <b>Thanks — your details are with our team for review. Message us on WhatsApp to confirm your number.</b><br><br>
+      <a class="wa" id="confirm-wa" href="https://wa.me/923013557339" target="_blank" rel="noopener">Confirm on WhatsApp</a>
+      <p class="hint">That message comes from your own number, so it proves the number is yours. We will review your registration and list you once it is approved.</p>
     </div>
   </section>
 
@@ -314,6 +329,22 @@
     <details>
       <summary>What if the tutor is not a good fit?</summary>
       <p>Just tell the tutor after the trial lesson. You are free to try another tutor from the list — there is no booking fee.</p>
+    </details>
+    <details>
+      <summary>How do you stop fake tutors?</summary>
+      <p>Every tutor registration is reviewed by our team before it appears on this page. Tutors must show permit proof to earn the “Permit verified” badge. If a tutor misbehaves, use the “Report this tutor” link on their card and we will remove them.</p>
+    </details>
+    <details>
+      <summary>Should I pay in advance?</summary>
+      <p>No. Never pay in advance. Start with one trial lesson, and pay the tutor only after it. If anyone asks for advance payment, report them using the “Report this tutor” link on their card.</p>
+    </details>
+    <details>
+      <summary>For parents — how do I stay safe?</summary>
+      <p><b>For parents — stay safe:</b><br>
+      • Contact tutors only through the buttons on this app, so we have a record and can help if anything goes wrong.<br>
+      • For home lessons, a parent or guardian must be at home during the lesson, and the lesson should happen in a common room — never leave your child alone with the tutor.<br>
+      • Never pay in advance. Start with one trial lesson and pay the tutor directly after it.<br>
+      • If anything feels wrong, tap 'Report this tutor' and tell us.</p>
     </details>
   </section>
 
@@ -351,12 +382,32 @@ const SEED = [
    bio:"Primary and lower-secondary Science and Biology. Hands-on experiments at home, simple explanations, no jargon."}
 ];
 
-/* ---- State: seed + any demo listings saved in this browser ---- */
-function loadSaved(){
-  try { return JSON.parse(localStorage.getItem("dubai_tutors_listings") || "[]"); }
-  catch(e){ return []; }
+/* ---- State: seed tutors only. Real tutors are added by our team after review. ---- */
+let tutors = SEED.slice();
+
+/* ---- Registration: posts the form to the Google Form behind the sheet.
+   FORM_CONFIG is filled in once the Google Form is connected (entry IDs). ---- */
+const FORM_CONFIG = { formId: "", entries: {} };
+const PERMIT_LABELS = {permitted: "I hold a UAE private tutor permit", applying: "I am applying for a permit", "not yet": "Not yet — I will apply"};
+const MODE_LABELS = {Home: "Home visit", Online: "Online", "Home + Online": "Home visit and online"};
+function submitToSheet(t){
+  if(!FORM_CONFIG.formId) return Promise.resolve(false);
+  const body = new URLSearchParams();
+  const e = FORM_CONFIG.entries;
+  const set = (key, val) => { if(e[key] && val !== undefined && val !== "") body.append("entry." + e[key], val); };
+  set("name", t.name);
+  set("whatsapp", t.wa);
+  set("subjects", t.subjects.join(", "));
+  set("grades", t.grades.join(", "));
+  set("areas", t.area);
+  set("rate", String(t.rate));
+  set("mode", MODE_LABELS[t.mode] || t.mode);
+  set("permit", PERMIT_LABELS[t.permit] || t.permit);
+  set("exp", String(t.exp));
+  set("bio", t.bio);
+  return fetch("https://docs.google.com/forms/d/e/" + FORM_CONFIG.formId + "/formResponse",
+    {method: "POST", mode: "no-cors", body}).then(() => true).catch(() => false);
 }
-let tutors = SEED.concat(loadSaved());
 
 const $ = id => document.getElementById(id);
 const cardsEl = $("cards"), countEl = $("result-count");
@@ -387,6 +438,7 @@ function cardHTML(t, i){
     '<p class="bio">' + esc(t.bio) + '</p>' +
     '<a class="wa" href="' + waLink(t) + '" target="_blank" rel="noopener" onclick="event.stopPropagation()">WhatsApp ' + esc(t.name.split(" ")[0]) + '</a>' +
     '<span class="details-link">View details →</span>' +
+    '<a class="report-link" href="https://wa.me/923013557339?text=' + encodeURIComponent("I want to report a tutor on Dubai Tutors: " + t.name) + '" target="_blank" rel="noopener" onclick="event.stopPropagation()">Report this tutor</a>' +
   '</article>';
 }
 
@@ -450,6 +502,7 @@ function openModal(t){
     '</dl>' +
     '<p class="bio">' + esc(t.bio) + '</p>' +
     '<a class="wa" href="' + waLink(t) + '" target="_blank" rel="noopener">Message on WhatsApp</a>' +
+    '<a class="report-link" href="https://wa.me/923013557339?text=' + encodeURIComponent("I want to report a tutor on Dubai Tutors: " + t.name) + '" target="_blank" rel="noopener">Report this tutor</a>' +
     '<p class="hint">You will chat with the tutor directly. Agree the price, time and place before the first lesson.</p>';
   modalBg.classList.add("open");
   $("modal-close").addEventListener("click", closeModal);
@@ -458,7 +511,8 @@ function closeModal(){ modalBg.classList.remove("open"); }
 modalBg.addEventListener("click", e => { if(e.target === modalBg) closeModal(); });
 document.addEventListener("keydown", e => { if(e.key === "Escape") closeModal(); });
 
-/* ---- Tutor form ---- */
+/* ---- Tutor form: validate, send to the review sheet, show the WhatsApp confirm step.
+   Nothing is listed automatically — listing happens only after human review. ---- */
 $("tutor-form").addEventListener("submit", e => {
   e.preventDefault();
   const t = {
@@ -471,22 +525,18 @@ $("tutor-form").addEventListener("submit", e => {
     rate: parseInt($("t-rate").value, 10),
     exp: parseInt($("t-exp").value || "0", 10),
     permit: $("t-permit").value,
-    bio: $("t-bio").value.trim(),
-    isNew: true
+    bio: $("t-bio").value.trim()
   };
   if(!t.name || !t.wa || !t.subjects[0] || !t.area || !t.mode || !t.rate || !t.bio){
     alert("Please fill in all the required fields.");
     return;
   }
-  const saved = loadSaved();
-  saved.push(t);
-  try { localStorage.setItem("dubai_tutors_listings", JSON.stringify(saved)); } catch(err){}
-  tutors.push(t);
+  const msg = "Hi, I'm " + t.name + ", I just registered as a tutor on Dubai Tutors.";
+  $("confirm-wa").href = "https://wa.me/923013557339?text=" + encodeURIComponent(msg);
+  submitToSheet(t);
   $("tutor-form").reset();
   $("form-success").classList.add("show");
   $("form-success").scrollIntoView({behavior:"smooth", block:"center"});
-  render();
-  document.querySelector("#find").scrollIntoView({behavior:"smooth"});
 });
 
 render();
