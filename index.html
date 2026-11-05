@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dubai Tutors — British Curriculum Tutors in Dubai</title>
+<meta name="description" content="Find a trusted British-curriculum tutor in Dubai. Home visits and online lessons. Maths, English, Science and more.">
+<style>
+  :root{
+    --sand:#faf6ef; --card:#ffffff; --ink:#1f2a2e; --muted:#6b7a7d;
+    --teal:#0f766e; --teal-dark:#0b5e57; --gold:#c98a2b; --line:#e8e0d2;
+    --green-bg:#e6f4f1; --grey-bg:#f1f1f1;
+  }
+  *{box-sizing:border-box; margin:0; padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    background:var(--sand); color:var(--ink); line-height:1.55}
+  a{color:var(--teal)}
+  .wrap{max-width:960px; margin:0 auto; padding:0 16px}
+  header{background:var(--teal); color:#fff; padding:22px 0 26px}
+  header h1{font-size:26px; letter-spacing:.2px}
+  header p{opacity:.92; margin-top:4px; font-size:15px}
+  .demo-note{background:#fff7e0; border:1px solid #f0d48a; color:#6d4c00;
+    font-size:13px; padding:8px 12px; border-radius:8px; margin:14px 0 0}
+  .demo-note b{font-weight:700}
+  nav.sticky{position:sticky; top:0; z-index:20; background:var(--sand);
+    padding:12px 0; border-bottom:1px solid var(--line)}
+  nav.sticky .wrap{display:flex; gap:10px; flex-wrap:wrap}
+  nav.sticky a{font-size:14px; text-decoration:none; color:var(--teal); font-weight:600}
+  h2{font-size:21px; margin:28px 0 6px}
+  .sub{color:var(--muted); font-size:15px; margin-bottom:14px}
+  /* filters */
+  .filters{background:var(--card); border:1px solid var(--line); border-radius:12px;
+    padding:14px; display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:16px 0 6px}
+  .filters label{font-size:12px; color:var(--muted); display:block; margin-bottom:3px; font-weight:600}
+  .filters select, .filters input[type="search"]{width:100%; padding:10px; font-size:15px;
+    border:1px solid #cfd8d5; border-radius:8px; background:#fff; color:var(--ink)}
+  .filters .full{grid-column:1 / -1}
+  .filters button{grid-column:1 / -1; padding:12px; font-size:16px; font-weight:700;
+    background:var(--teal); color:#fff; border:none; border-radius:8px; cursor:pointer}
+  .filters button:hover{background:var(--teal-dark)}
+  .count{color:var(--muted); font-size:14px; margin:10px 2px}
+  /* tutor cards */
+  .cards{display:grid; grid-template-columns:1fr; gap:14px}
+  @media(min-width:640px){ .cards{grid-template-columns:1fr 1fr} .filters{grid-template-columns:repeat(3,1fr)} }
+  .card{background:var(--card); border:1px solid var(--line); border-radius:12px;
+    padding:16px; cursor:pointer; transition:box-shadow .15s}
+  .card:hover{box-shadow:0 4px 16px rgba(0,0,0,.08)}
+  .card-top{display:flex; gap:12px; align-items:center}
+  .avatar{width:52px; height:52px; border-radius:50%; background:var(--teal); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:19px; font-weight:700; flex:none}
+  .avatar.alt{background:var(--gold)}
+  .card-top h3{font-size:17px}
+  .card-top .rate{font-size:14px; color:var(--muted); margin-top:2px}
+  .rate b{color:var(--ink); font-size:16px}
+  .badges{margin-top:10px; display:flex; flex-wrap:wrap; gap:6px}
+  .badge{font-size:12px; font-weight:700; padding:3px 9px; border-radius:20px}
+  .badge.permit{background:var(--green-bg); color:var(--teal-dark)}
+  .badge.permit-apply{background:var(--grey-bg); color:#555}
+  .badge.new{background:#fdf0d5; color:#8a5a00}
+  .badge.mode{background:#eef3f6; color:#33565e}
+  .tags{margin-top:10px; font-size:14px; color:var(--muted)}
+  .tags b{color:var(--ink); font-weight:600}
+  .bio{margin-top:10px; font-size:14px}
+  .wa{display:inline-block; margin-top:12px; background:#25d366; color:#fff; font-weight:700;
+    text-decoration:none; padding:10px 16px; border-radius:8px; font-size:15px}
+  .wa:hover{background:#1fb857}
+  .details-link{margin-left:10px; font-size:14px}
+  .empty{background:var(--card); border:1px dashed var(--line); border-radius:12px;
+    padding:24px; text-align:center; color:var(--muted)}
+  /* modal */
+  .modal-bg{position:fixed; inset:0; background:rgba(0,0,0,.5); display:none;
+    align-items:flex-start; justify-content:center; padding:24px 12px; z-index:50; overflow:auto}
+  .modal-bg.open{display:flex}
+  .modal{background:#fff; border-radius:14px; max-width:560px; width:100%; padding:22px; position:relative}
+  .modal .close{position:absolute; top:12px; right:14px; font-size:22px; border:none;
+    background:none; cursor:pointer; color:var(--muted)}
+  .modal h3{font-size:20px; margin-top:6px}
+  .modal dl{display:grid; grid-template-columns:110px 1fr; gap:6px 12px; margin:14px 0; font-size:15px}
+  .modal dt{color:var(--muted)}
+  /* how it works */
+  .steps{display:grid; grid-template-columns:1fr; gap:12px}
+  @media(min-width:640px){ .steps{grid-template-columns:1fr 1fr 1fr} }
+  .step{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px}
+  .step .n{width:30px; height:30px; border-radius:50%; background:var(--teal); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-weight:700; margin-bottom:8px}
+  .step h4{font-size:16px; margin-bottom:4px}
+  .step p{font-size:14px; color:var(--muted)}
+  .trust{background:var(--green-bg); border:1px solid #bfe3dc; border-radius:12px;
+    padding:16px; font-size:15px; margin-top:16px}
+  /* form */
+  form.tutor-form{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px}
+  form.tutor-form label{font-size:13px; color:var(--muted); display:block; margin:12px 0 3px; font-weight:600}
+  form.tutor-form input, form.tutor-form select, form.tutor-form textarea{
+    width:100%; padding:10px; font-size:15px; border:1px solid #cfd8d5; border-radius:8px; background:#fff}
+  form.tutor-form textarea{min-height:80px; resize:vertical}
+  form.tutor-form .row{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+  form.tutor-form button{margin-top:16px; width:100%; padding:13px; font-size:16px; font-weight:700;
+    background:var(--teal); color:#fff; border:none; border-radius:8px; cursor:pointer}
+  form.tutor-form button:hover{background:var(--teal-dark)}
+  .success{display:none; background:var(--green-bg); border:1px solid #bfe3dc; color:var(--teal-dark);
+    border-radius:12px; padding:18px; margin-top:14px; font-size:15px}
+  .success.show{display:block}
+  .hint{font-size:13px; color:var(--muted); margin-top:8px}
+  /* faq */
+  details{background:var(--card); border:1px solid var(--line); border-radius:10px;
+    padding:13px 15px; margin-bottom:10px}
+  details summary{font-weight:700; cursor:pointer; font-size:15px}
+  details p{margin-top:8px; font-size:15px; color:var(--muted)}
+  footer{margin:36px 0 28px; color:var(--muted); font-size:13px; text-align:center}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <h1>Dubai Tutors</h1>
+    <p>British-curriculum tutors in Dubai — at home or online. Message a tutor on WhatsApp and book a lesson.</p>
+    <div class="demo-note"><b>Demo — sample tutors.</b> The tutors below are samples to show how the app works. Real tutors join after launch.</div>
+  </div>
+</header>
+
+<nav class="sticky">
+  <div class="wrap">
+    <a href="#find">Find a tutor</a>
+    <a href="#how">How it works</a>
+    <a href="#join">List as a tutor</a>
+    <a href="#faq">FAQ</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <section id="find">
+    <h2>Find a tutor</h2>
+    <p class="sub">Filter by subject, grade and area. Every tutor teaches the British curriculum.</p>
+
+    <div class="filters">
+      <div>
+        <label for="f-subject">Subject</label>
+        <select id="f-subject">
+          <option value="">All subjects</option>
+          <option>Maths</option><option>English</option><option>Science</option>
+          <option>Business</option><option>Danish</option><option>History</option>
+          <option>Urdu</option><option>Physics</option><option>Chemistry</option>
+          <option>Biology</option>
+        </select>
+      </div>
+      <div>
+        <label for="f-grade">Grade</label>
+        <select id="f-grade">
+          <option value="">All grades</option>
+          <option>Primary</option><option>Grade 7-8</option>
+          <option>IGCSE</option><option>A-Level</option>
+        </select>
+      </div>
+      <div>
+        <label for="f-area">Area</label>
+        <select id="f-area">
+          <option value="">All areas</option>
+          <option>Al Safa</option><option>Dubai Hills</option><option>Marina</option>
+          <option>JVC</option><option>Business Bay</option><option>Downtown</option>
+          <option>Online</option>
+        </select>
+      </div>
+      <div>
+        <label for="f-mode">Lesson mode</label>
+        <select id="f-mode">
+          <option value="">Home visit or online</option>
+          <option value="Home">Home visit</option>
+          <option value="Online">Online</option>
+        </select>
+      </div>
+      <div>
+        <label for="f-rate">Max rate per hour</label>
+        <select id="f-rate">
+          <option value="">Any rate</option>
+          <option value="120">Up to AED 120</option>
+          <option value="150">Up to AED 150</option>
+          <option value="200">Up to AED 200</option>
+        </select>
+      </div>
+      <div>
+        <label for="f-q">Search by name or subject</label>
+        <input type="search" id="f-q" placeholder="e.g. Maths or Ayesha">
+      </div>
+      <button type="button" id="f-clear">Clear all filters</button>
+    </div>
+
+    <p class="count" id="result-count"></p>
+    <div class="cards" id="cards"></div>
+  </section>
+
+  <section id="how">
+    <h2>How it works</h2>
+    <p class="sub">For parents</p>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><h4>Find your tutor</h4><p>Filter by subject, grade, area and price. Read each tutor's experience and permit status.</p></div>
+      <div class="step"><div class="n">2</div><h4>Message on WhatsApp</h4><p>Tap the WhatsApp button on the tutor's card. Tell them your child's grade and what you need.</p></div>
+      <div class="step"><div class="n">3</div><h4>Book a trial lesson</h4><p>Agree a time and price with the tutor directly. Most parents start with one trial lesson.</p></div>
+    </div>
+    <p class="sub" style="margin-top:22px">For tutors</p>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><h4>List yourself</h4><p>Fill in the form below with your subjects, areas, rate and permit status.</p></div>
+      <div class="step"><div class="n">2</div><h4>We check your permit</h4><p>Private tutors in the UAE need a permit. Permitted tutors get the verified badge.</p></div>
+      <div class="step"><div class="n">3</div><h4>Parents message you</h4><p>Your card appears in the list. Parents contact you on WhatsApp and book directly.</p></div>
+    </div>
+    <div class="trust"><b>Trust note:</b> In the UAE, private tutors need a permit to teach. This app lists tutors who hold a permit — look for the “Permit verified” badge on a tutor's card. Always agree the price and lesson time with the tutor before the first lesson.</div>
+  </section>
+
+  <section id="join">
+    <h2>List as a tutor</h2>
+    <p class="sub">Are you a British-curriculum tutor in Dubai? Add yourself — it takes two minutes.</p>
+    <form class="tutor-form" id="tutor-form">
+      <label for="t-name">Your name *</label>
+      <input id="t-name" required maxlength="40" placeholder="e.g. Ayesha K.">
+
+      <div class="row">
+        <div>
+          <label for="t-wa">WhatsApp number *</label>
+          <input id="t-wa" required inputmode="tel" placeholder="e.g. 971501234567">
+        </div>
+        <div>
+          <label for="t-rate">Rate — AED per hour *</label>
+          <input id="t-rate" required type="number" min="20" max="500" placeholder="e.g. 150">
+        </div>
+      </div>
+
+      <label for="t-subjects">Subjects you teach *</label>
+      <select id="t-subjects" required>
+        <option value="">Choose a main subject</option>
+        <option>Maths</option><option>English</option><option>Science</option>
+        <option>Business</option><option>Danish</option><option>History</option>
+        <option>Urdu</option><option>Physics</option><option>Chemistry</option>
+        <option>Biology</option>
+      </select>
+
+      <div class="row">
+        <div>
+          <label for="t-grades">Grades *</label>
+          <select id="t-grades" required>
+            <option value="">Choose grades</option>
+            <option>Primary</option><option>Grade 7-8</option>
+            <option>IGCSE</option><option>A-Level</option>
+            <option>Primary, Grade 7-8</option>
+            <option>Grade 7-8, IGCSE</option>
+            <option>IGCSE, A-Level</option>
+          </select>
+        </div>
+        <div>
+          <label for="t-area">Area *</label>
+          <select id="t-area" required>
+            <option value="">Choose area</option>
+            <option>Al Safa</option><option>Dubai Hills</option><option>Marina</option>
+            <option>JVC</option><option>Business Bay</option><option>Downtown</option>
+            <option>Online</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div>
+          <label for="t-mode">Lesson mode *</label>
+          <select id="t-mode" required>
+            <option value="">Choose mode</option>
+            <option value="Home">Home visit</option>
+            <option value="Online">Online</option>
+            <option value="Home + Online">Home visit and online</option>
+          </select>
+        </div>
+        <div>
+          <label for="t-permit">Permit status *</label>
+          <select id="t-permit" required>
+            <option value="">Choose status</option>
+            <option value="permitted">I hold a UAE private tutor permit</option>
+            <option value="applying">I am applying for a permit</option>
+            <option value="not yet">Not yet — I will apply</option>
+          </select>
+        </div>
+      </div>
+
+      <label for="t-exp">Years of experience</label>
+      <input id="t-exp" type="number" min="0" max="40" placeholder="e.g. 6">
+
+      <label for="t-bio">Short bio *</label>
+      <textarea id="t-bio" required maxlength="240" placeholder="One or two lines about how you teach."></textarea>
+
+      <button type="submit">Add my listing</button>
+      <p class="hint">Demo version: your listing is saved in this browser only (localStorage). No account is created and nothing is sent to a server.</p>
+    </form>
+    <div class="success" id="form-success">
+      <b>Thank you — your listing is added.</b><br>
+      Your tutor card now appears in the list above (marked “New”). Parents can message you on WhatsApp. We will check your permit before launch and add the verified badge if it is in place.
+    </div>
+  </section>
+
+  <section id="faq">
+    <h2>Questions parents ask</h2>
+    <details>
+      <summary>Do tutors on this app need a permit?</summary>
+      <p>Yes. In the UAE, private tutors need a permit to teach. Tutors who hold one show a “Permit verified” badge. Tutors who are applying show that status on their card.</p>
+    </details>
+    <details>
+      <summary>How do I pay the tutor?</summary>
+      <p>Directly to the tutor — most accept bank transfer or cash. Agree the price and payment method with the tutor on WhatsApp before the first lesson. Dubai Tutors does not take payment.</p>
+    </details>
+    <details>
+      <summary>Can I try one lesson first?</summary>
+      <p>Yes. Most parents start with a single trial lesson and then decide. Ask the tutor about a trial when you message them.</p>
+    </details>
+    <details>
+      <summary>Home visit or online — which is better?</summary>
+      <p>Home visits suit younger children. Online suits IGCSE and A-Level students who are used to studying on a screen. Use the “Lesson mode” filter to see tutors for each.</p>
+    </details>
+    <details>
+      <summary>What if the tutor is not a good fit?</summary>
+      <p>Just tell the tutor after the trial lesson. You are free to try another tutor from the list — there is no booking fee.</p>
+    </details>
+  </section>
+
+</main>
+
+<div class="modal-bg" id="modal-bg" role="dialog" aria-modal="true">
+  <div class="modal" id="modal"></div>
+</div>
+
+<footer>
+  Dubai Tutors — demo preview. Sample tutors shown. Real tutors join after launch.<br>
+  Private tutors in the UAE need a permit.
+</footer>
+
+<script>
+/* ---- Seed data: SAMPLE ONLY, demo tutors ---- */
+const SEED = [
+  {name:"Ayesha K.", subjects:["Maths","Physics"], grades:["IGCSE","A-Level"], area:"Dubai Hills", mode:"Home + Online", rate:150, exp:8, permit:"permitted", wa:"971500000001",
+   bio:"British-curriculum Maths specialist. Calm, structured lessons with past-paper practice for IGCSE and A-Level."},
+  {name:"Omar S.", subjects:["English","History"], grades:["Primary","Grade 7-8"], area:"Al Safa", mode:"Home", rate:120, exp:6, permit:"permitted", wa:"971500000002",
+   bio:"Primary and lower-secondary English. Builds reading confidence with short, fun writing tasks."},
+  {name:"Priya M.", subjects:["Science","Biology","Chemistry"], grades:["IGCSE"], area:"Marina", mode:"Online", rate:130, exp:5, permit:"permitted", wa:"971500000003",
+   bio:"IGCSE Science — Biology and Chemistry. Clear diagrams, exam technique and regular progress notes for parents."},
+  {name:"Hassan R.", subjects:["Maths","Physics"], grades:["Grade 7-8","IGCSE"], area:"JVC", mode:"Home + Online", rate:110, exp:4, permit:"applying", wa:"971500000004",
+   bio:"Maths for Grades 7–8 and IGCSE. Patient with students who say they hate Maths — most change their mind."},
+  {name:"Sara L.", subjects:["English","Danish"], grades:["Primary","Grade 7-8"], area:"Business Bay", mode:"Online", rate:140, exp:7, permit:"permitted", wa:"971500000005",
+   bio:"English and Danish for primary and lower-secondary pupils. Native Danish speaker, British curriculum trained."},
+  {name:"Bilal A.", subjects:["Business","Maths"], grades:["A-Level"], area:"Downtown", mode:"Online", rate:180, exp:10, permit:"permitted", wa:"971500000006",
+   bio:"A-Level Business and Maths. Ten years in Dubai schools. Focus on case studies and exam timing."},
+  {name:"Maria F.", subjects:["Science","Chemistry"], grades:["IGCSE","A-Level"], area:"Dubai Hills", mode:"Home", rate:160, exp:9, permit:"permitted", wa:"971500000007",
+   bio:"Chemistry to A-Level, with practicals explained step by step. Strong record of grade improvement."},
+  {name:"Ahmed Z.", subjects:["Urdu","English"], grades:["Primary"], area:"Al Safa", mode:"Home + Online", rate:100, exp:3, permit:"not yet", wa:"971500000008",
+   bio:"Urdu and English for young learners. Gentle, game-based lessons that keep children looking forward to class."},
+  {name:"Nadia T.", subjects:["Biology","Science"], grades:["Primary","Grade 7-8"], area:"Marina", mode:"Home", rate:125, exp:6, permit:"permitted", wa:"971500000009",
+   bio:"Primary and lower-secondary Science and Biology. Hands-on experiments at home, simple explanations, no jargon."}
+];
+
+/* ---- State: seed + any demo listings saved in this browser ---- */
+function loadSaved(){
+  try { return JSON.parse(localStorage.getItem("dubai_tutors_listings") || "[]"); }
+  catch(e){ return []; }
+}
+let tutors = SEED.concat(loadSaved());
+
+const $ = id => document.getElementById(id);
+const cardsEl = $("cards"), countEl = $("result-count");
+
+function initials(name){
+  return name.split(" ").filter(Boolean).map(w=>w[0]).join("").slice(0,2).toUpperCase();
+}
+function esc(s){
+  return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+function waLink(t){
+  const msg = encodeURIComponent("Hi " + t.name + ", I found you on Dubai Tutors. I'd like to ask about " + t.subjects.join(" / ") + " lessons for my child.");
+  return "https://wa.me/" + t.wa + "?text=" + msg;
+}
+function permitBadge(t){
+  if(t.permit === "permitted") return '<span class="badge permit">✓ Permit verified</span>';
+  if(t.permit === "applying") return '<span class="badge permit-apply">Permit: applying</span>';
+  return '<span class="badge permit-apply">Permit: not yet</span>';
+}
+function cardHTML(t, i){
+  const alt = i % 2 ? " alt" : "";
+  return '<article class="card" data-i="' + i + '">' +
+    '<div class="card-top"><div class="avatar' + alt + '">' + esc(initials(t.name)) + '</div>' +
+    '<div><h3>' + esc(t.name) + '</h3><div class="rate"><b>AED ' + t.rate + '</b> / hour · ' + t.exp + ' yrs experience</div></div></div>' +
+    '<div class="badges">' + permitBadge(t) + '<span class="badge mode">' + esc(t.mode) + '</span>' +
+    (t.isNew ? '<span class="badge new">New listing</span>' : '') + '</div>' +
+    '<p class="tags"><b>' + esc(t.subjects.join(", ")) + '</b> · ' + esc(t.grades.join(", ")) + '<br>' + esc(t.area) + ' · ' + esc(t.mode) + '</p>' +
+    '<p class="bio">' + esc(t.bio) + '</p>' +
+    '<a class="wa" href="' + waLink(t) + '" target="_blank" rel="noopener" onclick="event.stopPropagation()">WhatsApp ' + esc(t.name.split(" ")[0]) + '</a>' +
+    '<span class="details-link">View details →</span>' +
+  '</article>';
+}
+
+/* ---- Filtering ---- */
+function getFilters(){
+  return {
+    subject: $("f-subject").value,
+    grade: $("f-grade").value,
+    area: $("f-area").value,
+    mode: $("f-mode").value,
+    maxRate: $("f-rate").value ? parseInt($("f-rate").value, 10) : null,
+    q: $("f-q").value.trim().toLowerCase()
+  };
+}
+function applyFilters(list, f){
+  return list.filter(t => {
+    if(f.subject && !t.subjects.includes(f.subject)) return false;
+    if(f.grade && !t.grades.includes(f.grade)) return false;
+    if(f.area && t.area !== f.area && !(f.area === "Online" && (t.mode === "Online" || t.mode === "Home + Online"))) return false;
+    if(f.mode && t.mode !== f.mode && t.mode !== "Home + Online") return false;
+    if(f.maxRate !== null && t.rate > f.maxRate) return false;
+    if(f.q && !(t.name.toLowerCase().includes(f.q) || t.subjects.join(" ").toLowerCase().includes(f.q))) return false;
+    return true;
+  });
+}
+function render(){
+  const f = getFilters();
+  const list = applyFilters(tutors, f);
+  countEl.textContent = list.length + (list.length === 1 ? " tutor" : " tutors") + " found";
+  cardsEl.innerHTML = list.length
+    ? list.map((t, i) => cardHTML(t, tutors.indexOf(t))).join("")
+    : '<div class="empty">No tutors match those filters. Try clearing a filter — for example, widen the area or the rate.</div>';
+  cardsEl.querySelectorAll(".card").forEach(el => {
+    el.addEventListener("click", () => openModal(tutors[parseInt(el.dataset.i, 10)]));
+  });
+}
+["f-subject","f-grade","f-area","f-mode","f-rate"].forEach(id => {
+  $(id).addEventListener("change", render);
+});
+$("f-q").addEventListener("input", render);
+$("f-clear").addEventListener("click", () => {
+  ["f-subject","f-grade","f-area","f-mode","f-rate"].forEach(id => { $(id).value = ""; });
+  $("f-q").value = "";
+  render();
+});
+
+/* ---- Detail modal ---- */
+const modalBg = $("modal-bg"), modalEl = $("modal");
+function openModal(t){
+  modalEl.innerHTML =
+    '<button class="close" id="modal-close" aria-label="Close">×</button>' +
+    '<div class="card-top"><div class="avatar">' + esc(initials(t.name)) + '</div>' +
+    '<div><h3>' + esc(t.name) + '</h3><div class="rate"><b>AED ' + t.rate + '</b> / hour · ' + t.exp + ' yrs experience</div></div></div>' +
+    '<div class="badges">' + permitBadge(t) + '<span class="badge mode">' + esc(t.mode) + '</span></div>' +
+    '<dl>' +
+    '<dt>Subjects</dt><dd>' + esc(t.subjects.join(", ")) + '</dd>' +
+    '<dt>Grades</dt><dd>' + esc(t.grades.join(", ")) + '</dd>' +
+    '<dt>Area</dt><dd>' + esc(t.area) + '</dd>' +
+    '<dt>Lessons</dt><dd>' + esc(t.mode) + '</dd>' +
+    '<dt>Permit</dt><dd>' + (t.permit === "permitted" ? "Verified — holds a UAE private tutor permit" : t.permit === "applying" ? "Applying for a permit" : "Not yet — will apply") + '</dd>' +
+    '</dl>' +
+    '<p class="bio">' + esc(t.bio) + '</p>' +
+    '<a class="wa" href="' + waLink(t) + '" target="_blank" rel="noopener">Message on WhatsApp</a>' +
+    '<p class="hint">You will chat with the tutor directly. Agree the price, time and place before the first lesson.</p>';
+  modalBg.classList.add("open");
+  $("modal-close").addEventListener("click", closeModal);
+}
+function closeModal(){ modalBg.classList.remove("open"); }
+modalBg.addEventListener("click", e => { if(e.target === modalBg) closeModal(); });
+document.addEventListener("keydown", e => { if(e.key === "Escape") closeModal(); });
+
+/* ---- Tutor form ---- */
+$("tutor-form").addEventListener("submit", e => {
+  e.preventDefault();
+  const t = {
+    name: $("t-name").value.trim(),
+    wa: $("t-wa").value.replace(/[^0-9]/g, ""),
+    subjects: [$("t-subjects").value],
+    grades: $("t-grades").value.split(",").map(s => s.trim()),
+    area: $("t-area").value,
+    mode: $("t-mode").value,
+    rate: parseInt($("t-rate").value, 10),
+    exp: parseInt($("t-exp").value || "0", 10),
+    permit: $("t-permit").value,
+    bio: $("t-bio").value.trim(),
+    isNew: true
+  };
+  if(!t.name || !t.wa || !t.subjects[0] || !t.area || !t.mode || !t.rate || !t.bio){
+    alert("Please fill in all the required fields.");
+    return;
+  }
+  const saved = loadSaved();
+  saved.push(t);
+  try { localStorage.setItem("dubai_tutors_listings", JSON.stringify(saved)); } catch(err){}
+  tutors.push(t);
+  $("tutor-form").reset();
+  $("form-success").classList.add("show");
+  $("form-success").scrollIntoView({behavior:"smooth", block:"center"});
+  render();
+  document.querySelector("#find").scrollIntoView({behavior:"smooth"});
+});
+
+render();
+</script>
+</body>
+</html>
