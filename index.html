@@ -195,6 +195,7 @@
     • Never pay in advance. Start with one trial lesson and pay the tutor directly after it.<br>
     • If anything feels wrong, tap 'Report this tutor' and tell us.</div>
 
+    <p class="count" style="color:var(--muted); font-size:13px">Dubai Tutors is a listing directory only — we don't employ tutors and we're not responsible for lessons or payments between parents and tutors. See the full note at the bottom of this page.</p>
     <p class="count" id="result-count"></p>
     <div class="cards" id="cards"></div>
   </section>
@@ -220,91 +221,15 @@
     <h2>List as a tutor</h2>
     <p class="sub">Are you a British-curriculum tutor in Dubai? Add yourself — it takes two minutes.</p>
     <div class="fraud-note"><b>Stay safe:</b> Every registration is reviewed by our team before it appears on this page. Tutors must show permit proof for the “Permit verified” badge. Never pay in advance — start with one trial lesson and pay the tutor only after it.</div>
-    <form class="tutor-form" id="tutor-form">
-      <div class="fraud-note"><b>Read before you apply:</b><br>
+    <div class="fraud-note"><b>Read before you apply:</b><br>
       • Every application is reviewed by our team. Nothing goes live automatically.<br>
       • After submitting, confirm your number by messaging us on WhatsApp. We will ask for your tutor permit and ID — send them to earn your 'Permit verified' badge. No permit proof, no listing.<br>
       • If any detail is found fake — a false permit, false identity, or false qualifications — you will be blocked and you cannot apply again.</div>
-      <label for="t-name">Your name *</label>
-      <input id="t-name" required maxlength="40" placeholder="e.g. Ayesha K.">
-
-      <div class="row">
-        <div>
-          <label for="t-wa">WhatsApp number *</label>
-          <input id="t-wa" required inputmode="tel" placeholder="e.g. 971501234567">
-        </div>
-        <div>
-          <label for="t-rate">Rate — AED per hour *</label>
-          <input id="t-rate" required type="number" min="20" max="500" placeholder="e.g. 150">
-        </div>
-      </div>
-
-      <label for="t-subjects">Subjects you teach *</label>
-      <select id="t-subjects" required>
-        <option value="">Choose a main subject</option>
-        <option>Maths</option><option>English</option><option>Science</option>
-        <option>Business</option><option>Danish</option><option>History</option>
-        <option>Urdu</option><option>Physics</option><option>Chemistry</option>
-        <option>Biology</option>
-      </select>
-
-      <div class="row">
-        <div>
-          <label for="t-grades">Grades *</label>
-          <select id="t-grades" required>
-            <option value="">Choose grades</option>
-            <option>Primary</option><option>Grade 7-8</option>
-            <option>IGCSE</option><option>A-Level</option>
-            <option>Primary, Grade 7-8</option>
-            <option>Grade 7-8, IGCSE</option>
-            <option>IGCSE, A-Level</option>
-          </select>
-        </div>
-        <div>
-          <label for="t-area">Area *</label>
-          <select id="t-area" required>
-            <option value="">Choose area</option>
-            <option>Al Safa</option><option>Dubai Hills</option><option>Marina</option>
-            <option>JVC</option><option>Business Bay</option><option>Downtown</option>
-            <option>Online</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="row">
-        <div>
-          <label for="t-mode">Lesson mode *</label>
-          <select id="t-mode" required>
-            <option value="">Choose mode</option>
-            <option value="Home">Home visit</option>
-            <option value="Online">Online</option>
-            <option value="Home + Online">Home visit and online</option>
-          </select>
-        </div>
-        <div>
-          <label for="t-permit">Permit status *</label>
-          <select id="t-permit" required>
-            <option value="">Choose status</option>
-            <option value="permitted">I hold a UAE private tutor permit</option>
-            <option value="applying">I am applying for a permit</option>
-            <option value="not yet">Not yet — I will apply</option>
-          </select>
-        </div>
-      </div>
-
-      <label for="t-exp">Years of experience</label>
-      <input id="t-exp" type="number" min="0" max="40" placeholder="e.g. 6">
-
-      <label for="t-bio">Short bio *</label>
-      <textarea id="t-bio" required maxlength="240" placeholder="One or two lines about how you teach."></textarea>
-
-      <button type="submit">Add my listing</button>
-      <p class="hint">Your details go to our team for review. Nothing is listed until we approve it — that is how we keep fake tutors off this page.</p>
-    </form>
-    <div class="success" id="form-success">
-      <b>Thanks — your details are with our team for review. Message us on WhatsApp to confirm your number.</b><br><br>
-      <a class="wa" id="confirm-wa" href="https://wa.me/923013557339" target="_blank" rel="noopener">Confirm on WhatsApp</a>
-      <p class="hint">That message comes from your own number, so it proves the number is yours. We will review your registration and list you once it is approved.</p>
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe-MiL_JTluqkOX2keR9LdwAm9WKxv3s1fjIMLCfADHrmti5A/viewform?embedded=true" width="100%" height="1250" frameborder="0" marginheight="0" marginwidth="0" title="Tutor registration form">Loading…</iframe>
+    <div class="success show">
+      <b>After submitting, confirm your number on WhatsApp.</b><br><br>
+      <a class="wa" href="https://wa.me/923013557339?text=Hi%2C%20I%20just%20registered%20as%20a%20tutor%20on%20Dubai%20Tutors." target="_blank" rel="noopener">Confirm on WhatsApp</a>
+      <p class="hint">That message comes from your own number, so it proves the number is yours. We will review your registration and list you once it is approved. Your details go to our team for review — nothing is listed until we approve it.</p>
     </div>
   </section>
 
@@ -357,6 +282,11 @@
 <footer>
   Dubai Tutors — demo preview. Sample tutors shown. Real tutors join after launch.<br>
   Private tutors in the UAE need a permit.
+  <div class="disclaimer" style="text-align:left; max-width:760px; margin:18px auto 0; font-size:13px; line-height:1.55"><b>Important — please read:</b><br>
+  • Dubai Tutors is a listing directory only. We are not a school, agency or employer, and tutors listed here are independent.<br>
+  • We review applications and ask for permit proof, but we do not guarantee any tutor's qualifications, lessons, or results. Parents should check the tutor's permit and credentials themselves.<br>
+  • All lessons, bookings and payments are arranged directly between the parent and the tutor. We take no payment and accept no responsibility for lessons, payments, or any dispute between parents and tutors.<br>
+  • By using this site you agree you use it at your own risk.</div>
 </footer>
 
 <script>
@@ -385,29 +315,8 @@ const SEED = [
 /* ---- State: seed tutors only. Real tutors are added by our team after review. ---- */
 let tutors = SEED.slice();
 
-/* ---- Registration: posts the form to the Google Form behind the sheet.
-   FORM_CONFIG is filled in once the Google Form is connected (entry IDs). ---- */
-const FORM_CONFIG = { formId: "", entries: {} };
-const PERMIT_LABELS = {permitted: "I hold a UAE private tutor permit", applying: "I am applying for a permit", "not yet": "Not yet — I will apply"};
-const MODE_LABELS = {Home: "Home visit", Online: "Online", "Home + Online": "Home visit and online"};
-function submitToSheet(t){
-  if(!FORM_CONFIG.formId) return Promise.resolve(false);
-  const body = new URLSearchParams();
-  const e = FORM_CONFIG.entries;
-  const set = (key, val) => { if(e[key] && val !== undefined && val !== "") body.append("entry." + e[key], val); };
-  set("name", t.name);
-  set("whatsapp", t.wa);
-  set("subjects", t.subjects.join(", "));
-  set("grades", t.grades.join(", "));
-  set("areas", t.area);
-  set("rate", String(t.rate));
-  set("mode", MODE_LABELS[t.mode] || t.mode);
-  set("permit", PERMIT_LABELS[t.permit] || t.permit);
-  set("exp", String(t.exp));
-  set("bio", t.bio);
-  return fetch("https://docs.google.com/forms/d/e/" + FORM_CONFIG.formId + "/formResponse",
-    {method: "POST", mode: "no-cors", body}).then(() => true).catch(() => false);
-}
+/* ---- Registration: tutors apply through the embedded Google Form above.
+   Answers land in the "Form Responses 1" tab of the review sheet. ---- */
 
 const $ = id => document.getElementById(id);
 const cardsEl = $("cards"), countEl = $("result-count");
@@ -510,34 +419,6 @@ function openModal(t){
 function closeModal(){ modalBg.classList.remove("open"); }
 modalBg.addEventListener("click", e => { if(e.target === modalBg) closeModal(); });
 document.addEventListener("keydown", e => { if(e.key === "Escape") closeModal(); });
-
-/* ---- Tutor form: validate, send to the review sheet, show the WhatsApp confirm step.
-   Nothing is listed automatically — listing happens only after human review. ---- */
-$("tutor-form").addEventListener("submit", e => {
-  e.preventDefault();
-  const t = {
-    name: $("t-name").value.trim(),
-    wa: $("t-wa").value.replace(/[^0-9]/g, ""),
-    subjects: [$("t-subjects").value],
-    grades: $("t-grades").value.split(",").map(s => s.trim()),
-    area: $("t-area").value,
-    mode: $("t-mode").value,
-    rate: parseInt($("t-rate").value, 10),
-    exp: parseInt($("t-exp").value || "0", 10),
-    permit: $("t-permit").value,
-    bio: $("t-bio").value.trim()
-  };
-  if(!t.name || !t.wa || !t.subjects[0] || !t.area || !t.mode || !t.rate || !t.bio){
-    alert("Please fill in all the required fields.");
-    return;
-  }
-  const msg = "Hi, I'm " + t.name + ", I just registered as a tutor on Dubai Tutors.";
-  $("confirm-wa").href = "https://wa.me/923013557339?text=" + encodeURIComponent(msg);
-  submitToSheet(t);
-  $("tutor-form").reset();
-  $("form-success").classList.add("show");
-  $("form-success").scrollIntoView({behavior:"smooth", block:"center"});
-});
 
 render();
 </script>
